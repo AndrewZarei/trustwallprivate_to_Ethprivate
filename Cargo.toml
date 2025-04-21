@@ -1,0 +1,16 @@
+[package]
+name = "untitled"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bip39 = "2.1.0"
+hdpath = "0.6.3"
+hex = "0.4.3"
+hmac = "0.12.1"
+k256 = { version = "0.13.4", features = ["ecdsa"] }
+pbkdf2 = "0.12.2"
+sha2 = "0.10.8"
+sha3 = "0.10.8"
+tiny-hderive = "0.3.0"
+
