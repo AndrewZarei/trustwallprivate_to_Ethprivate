@@ -17,7 +17,7 @@ struct BlockchainKey {
 }
 
 fn main() -> io::Result<()> {
-    // 1. Get mnemonic from user
+    // here is input mnemonic from user
     let mut mnemonic_phrase = String::new();
     println!("Enter your Trust Wallet mnemonic phrase:");
     io::stdin().read_line(&mut mnemonic_phrase)?;
@@ -28,10 +28,10 @@ fn main() -> io::Result<()> {
 
     let seed = mnemonic.to_seed("");
 
-    // 2. Derive keys for all supported blockchains
+    // 2. Derive keys for Eth&Btc&.. until this commit
     let mut keys = Vec::new();
 
-    // Ethereum (and all EVM chains: BSC, MATIC, AVAX-C)
+    // Ethereum (Evm bases)
     if let Ok(eth_key) = derive_secp256k1_key(&seed, "m/44'/60'/0'/0/0", "Ethereum") {
         keys.push(eth_key);
     }
@@ -67,7 +67,7 @@ fn main() -> io::Result<()> {
 
 // ===== Key Derivation Functions =====
 
-/// Derive secp256k1 keys (for ETH, BTC, etc.)
+// Derive secp256k1 keys (for ETH, BTC, etc.)
 fn derive_secp256k1_key(seed: &[u8], path: &str, chain_name: &str) -> io::Result<BlockchainKey> {
     let master_key = Xpriv::new_master(Network::Bitcoin, seed)
         .map_err(|e| io::Error::new(io::ErrorKind::Other, format!("Master key failed: {:?}", e)))?;
